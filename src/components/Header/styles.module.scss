@@ -27,7 +27,7 @@
       transition: color 0.2s;
 
       & + a {
-          margin-left: 2rem;
+        margin-left: 2rem;
       }
 
       &:hover {
@@ -35,7 +35,7 @@
       }
       &.active {
         color: var(--white);
-        fonte-weight: bold;
+        font-weight: bold;
       }
 
       &.active::after {
@@ -49,5 +49,9 @@
         background: var(--yellow-500);
       }
     }
+  }
+
+  button {
+    margin-left: auto;
   }
 }
