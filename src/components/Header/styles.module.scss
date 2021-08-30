@@ -27,12 +27,15 @@
       &:hover{
         color: var(--white);
       }
+
       & + a {
         margin-left: 2rem;
       }
+
       &.active{
         color: var(--white);
       }
+      
       &.active::after{
         content: '';
         height: 3px;
@@ -44,6 +47,9 @@
         background: var(--yellow-500);
       }
     }
+  }
+  button{
+    margin-left: auto;
   }
 
 }
