@@ -13,7 +13,7 @@ export function SubscriptionButton({ priceId }: SubscriptionButtonProps) {
       signIn('github')
       return;
     }
-    //criação da checkout session
+    
   }
   return (
     <button
