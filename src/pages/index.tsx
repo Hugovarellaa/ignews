@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { SubscribeButton } from "../components/SubscribeButton";
 import styles from "./home.module.scss";
@@ -22,8 +23,14 @@ export default function Home() {
             <SubscribeButton />
           </div>
         </section>
-          <img src="/images/avatar.svg" alt="Girl coding" />
+        <img src="/images/avatar.svg" alt="Girl coding" />
       </main>
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return{
+    
+  }
+};
