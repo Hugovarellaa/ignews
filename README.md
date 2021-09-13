@@ -1,4 +1,8 @@
 
+# Configurações
+
+- Crie um arquivo .env.local
+
 
 # Stripe
 
