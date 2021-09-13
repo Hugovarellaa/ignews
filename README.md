@@ -10,4 +10,7 @@
 # FaunaDB 
 
 - cria uma conta no faunaDb
-
+- vá em security e crie uma chave secreta
+- crie um banco de dados
+- crie collection com nome users
+- 
