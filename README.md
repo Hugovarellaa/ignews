@@ -2,7 +2,7 @@
 # Configurações
 
 - Crie um arquivo .env.local
-
+- Siga o modelo abaixo
 
 # Stripe
 
