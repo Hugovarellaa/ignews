@@ -1,4 +1,4 @@
-import {  GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { SubscribeButton } from "../components/SubscribeButton";
 import { stripe } from "../services/stripe";
@@ -50,6 +50,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       product,
     },
-    revalidate: 60 * 60 * 24 // 24 hours.
+    revalidate: 60 * 60 * 24, // 24 hours.
   };
 };
