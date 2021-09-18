@@ -6,3 +6,5 @@
 - React-icons (Pagote de imagens do react)
 - Criando conta e produto no stripe
 - Instalando stripe e copiando as chaves secreta e publica
+- faunadb
+- axios
