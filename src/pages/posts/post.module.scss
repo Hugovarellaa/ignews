@@ -44,7 +44,7 @@
     }
   }
 }
-.continueReading{
+.continueReading {
   padding: 2rem;
   text-align: center;
   background: var(--gray-700);
@@ -53,14 +53,12 @@
   font-weight: bold;
   margin: 4rem 0 2rem;
 
-  a{
+  a {
     color: var(--yellow-500);
     margin-left: 0.5rem;
 
-    &:hover{
+    &:hover {
       text-decoration: underline;
     }
   }
-
-  
 }
