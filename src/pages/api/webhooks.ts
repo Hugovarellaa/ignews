@@ -2,14 +2,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Readable } from "stream";
 import Stripe from "stripe";
 import { stripe } from "../../services/stripe";
+import { saveSubscript } from "./_lib/manageSubscription";
 
 async function buffer(readable: Readable) {
   const chunks = [];
   for await (const chunk of readable) {
     //Adiciona o push assim
-    chunks.push(
-      typeof chunk === "string" ? Buffer.from(chunk) : chunk
-    )
+    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
   }
   return Buffer.concat(chunks);
 }
@@ -20,7 +19,11 @@ export const config = {
   },
 };
 
-const relevantEvent = new Set(["checkout.session.completed"]);
+const relevantEvent = new Set([
+  "checkout.session.completed",
+  "customer.subscription.updated",
+  "customer.subscription.deleted",
+]);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -42,7 +45,35 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { type } = event;
     if (relevantEvent.has(type)) {
-      console.log(`evento recebido`, event);
+      try {
+        switch (type) {
+          case "checkout.session.completed":
+            const checkoutSession = event.data
+              .object as Stripe.Checkout.Session;
+
+            await saveSubscript(
+              checkoutSession.subscription.toString(),
+              checkoutSession.customer.toString(),
+              true
+            );
+            break;
+
+          case "customer.subscription.updated":
+          case "customer.subscription.deleted":
+            const subscription = event.data.object as Stripe.Subscription;
+            await saveSubscript(
+              subscription.id,
+              subscription.customer.toString()
+            );
+
+            break;
+          default:
+            throw new Error("unhandled event.");
+        }
+      } catch (err) {
+        console.log({ err: err.message });
+        return res.json({ err: "Webhook handler failed" });
+      }
     }
 
     res.json({ received: true });
