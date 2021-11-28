@@ -40,14 +40,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   params,
 }) => {
   const session = await getSession({ req });
-  if (!session?.activeSubscription) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
 
   //Recuperando o slug e chamando o prismic e formatando os dados
   const { slug } = params;
@@ -66,6 +58,15 @@ export const getServerSideProps: GetServerSideProps = async ({
       }
     ),
   };
+
+  if (!session?.activeSubscription) {
+    return {
+      redirect: {
+        destination: `/posts/preview/${post.slug}`,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
